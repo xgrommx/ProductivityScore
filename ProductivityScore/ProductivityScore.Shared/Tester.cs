@@ -29,6 +29,10 @@ namespace ProductivityScore
             entries.Add(new EntryModelView { Description = "Desc2", Points = 200 });
             entries.Add(new EntryModelView { Description = "Desc3", Points = 300 });
             entries.Remove(entries[1]);
+
+            Debug.WriteLine("Final: ");
+            foreach (EntryModelView entry in entries)
+                Debug.WriteLine("Existing: " + entry);
         }
     }
 }
