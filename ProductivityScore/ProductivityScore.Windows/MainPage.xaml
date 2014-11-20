@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="1" Margin="20" Background="Black">
             <TextBlock FontSize="36" Margin="40,20,0,0">History</TextBlock>
-            <ItemsControl x:Name="HistoryItems" Background="Red">
+            <ItemsControl x:Name="HistoryItems">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel/>
