@@ -33,33 +33,4 @@ namespace ProductivityScore
             HistoryItems.ItemsSource = entries;
         }
     }
-
-    class EntryP : Data
-    {
-        private int _id;
-        public int Id 
-        {
-            get { return _id; }
-            set { SetField(ref _id, value); }
-        }
-
-        private string _description;
-        public string Description
-        {
-            get { return _description; }
-            set { SetField(ref _description, value); }
-        }
-
-        private int _points;
-        public int Points
-        {
-            get { return _points; }
-            set { SetField(ref _points, value); }
-        }
-
-        public override string ToString()
-        {
-            return "[" + Description + ": " + Points + "]";
-        }
-    }
 }

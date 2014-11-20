@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using SQLite;
 using Windows.UI.Xaml;
+using ProductivityScore.Utils;
 
 
 namespace ProductivityScore

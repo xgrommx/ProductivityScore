@@ -23,7 +23,7 @@ namespace ProductivityScore
         {
             Debug.WriteLine("Testing");
 
-            var entries = new Entries();
+            var entries = Entries.Singleton;
             entries.ItemsAdded.Subscribe(x => Debug.WriteLine("Added " + x.Description));
             entries.ItemsRemoved.Subscribe(x => Debug.WriteLine("Removed " + x.Description));
 

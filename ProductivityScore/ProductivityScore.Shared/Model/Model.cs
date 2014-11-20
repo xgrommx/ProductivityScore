@@ -4,6 +4,7 @@ using System.Text;
 using ReactiveUI;
 using SQLite;
 using System.Linq;
+using System.Diagnostics;
 
 namespace ProductivityScore.Model
 {
@@ -23,10 +24,22 @@ namespace ProductivityScore.Model
     class Entries
         : ReactiveList<Entry>
     {
-        public Entries()
+        private static Entries _singleton;
+        public static Entries Singleton
+        {
+            get
+            {
+                if (_singleton == null)
+                    _singleton = new Entries();
+                return _singleton;
+            }
+        }
+
+        private Entries()
         {
             DB.Default.CreateTable<Entry>();
             AddRange(DB.Default.Table<Entry>());
+            Debug.WriteLine("Loaded " + Count + " " + GetType().Name);
 
             this.ItemsAdded.Subscribe(x => DB.Default.Insert(x));
             this.ItemsRemoved.Subscribe(x => DB.Default.Delete(x));
