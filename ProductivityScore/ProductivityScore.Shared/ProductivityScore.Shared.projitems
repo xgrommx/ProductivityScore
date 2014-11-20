@@ -17,7 +17,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Model\DB.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Model.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Tester.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utils.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\Tester.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\Utils.cs" />
   </ItemGroup>
 </Project>
