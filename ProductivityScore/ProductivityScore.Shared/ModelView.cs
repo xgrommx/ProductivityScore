@@ -90,6 +90,12 @@ namespace ProductivityScore.MVVC
 
             this.Id = 0; // No longer reflected in the database
         }
+
+
+        public override string ToString()
+        {
+            return "[" + Id + ": " + Description + "]";
+        }
     }
 
     class EntriesModelView
@@ -97,14 +103,18 @@ namespace ProductivityScore.MVVC
     {
         protected override IEnumerable<EntryModelView> LoadAll()
         {
-            return EntryModelView.DB.Table<EntryModel>().Select(x =>
-                new EntryModelView 
-                {
-                    Id = x.Id,
-                    Description = x.Description,
-                    Points = x.Points,
-                }
-            );
+            return EntryModelView.DB.Table<EntryModel>().Select(toEntryMV);
+        }
+
+        private static EntryModelView toEntryMV(EntryModel x)
+        {
+            var entryMV = new EntryModelView
+            {
+                Id = x.Id,
+                Description = x.Description,
+                Points = x.Points,
+            };
+            return entryMV;
         }
     }
 }
