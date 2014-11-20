@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 using System.Reactive;
 using System.Reactive.Linq;
 using ReactiveUI;
-using ProductivityScore.MVVC;
+using ProductivityScore.Model;
 
 namespace ProductivityScore
 {
@@ -16,22 +16,27 @@ namespace ProductivityScore
 
         public static void Test()
         {
+            //Test1();
+        }
+
+        private static void Test1()
+        {
             Debug.WriteLine("Testing");
 
-            var entries = new EntriesModelView();
+            var entries = new Entries();
             entries.ItemsAdded.Subscribe(x => Debug.WriteLine("Added " + x.Description));
             entries.ItemsRemoved.Subscribe(x => Debug.WriteLine("Removed " + x.Description));
 
-            foreach (EntryModelView entry in entries)
+            foreach (Entry entry in entries)
                 Debug.WriteLine("Existing: " + entry);
 
-            entries.Add(new EntryModelView { Description = "Desc1", Points = 100 });
-            entries.Add(new EntryModelView { Description = "Desc2", Points = 200 });
-            entries.Add(new EntryModelView { Description = "Desc3", Points = 300 });
+            entries.Add(new Entry { Description = "Desc1", Points = 100 });
+            entries.Add(new Entry { Description = "Desc2", Points = 200 });
+            entries.Add(new Entry { Description = "Desc3", Points = 300 });
             entries.Remove(entries[1]);
 
             Debug.WriteLine("Final: ");
-            foreach (EntryModelView entry in entries)
+            foreach (Entry entry in entries)
                 Debug.WriteLine("Existing: " + entry);
         }
     }
