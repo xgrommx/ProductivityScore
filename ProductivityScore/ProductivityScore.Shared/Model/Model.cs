@@ -11,7 +11,7 @@ namespace ProductivityScore.Model
     class Entry
     {
         [AutoIncrement, PrimaryKey]
-        protected internal int Id { get; set; }
+        public int Id { get; set; }
         public string Description { get; set; }
         public int Points { get; set; }
         public DateTime Date { get; set; }
