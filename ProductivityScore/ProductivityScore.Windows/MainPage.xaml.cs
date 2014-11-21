@@ -45,7 +45,8 @@ namespace ProductivityScore
             AddEntryStream.Subscribe(x => entries.Add(x));
         }
 
-        private void Button_Tapped(object sender, TappedRoutedEventArgs e)
+
+        private void AddTemplateButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             AddTemplateStream.OnNext(new Template
             { 
@@ -54,7 +55,8 @@ namespace ProductivityScore
             });
         }
 
-        private void Button_Tapped_1(object sender, TappedRoutedEventArgs e)
+
+        private void AddEntryButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             Template context = XAMLHelper.getDataContext<Template>(sender as DependencyObject);
             AddEntryStream.OnNext(new Entry
