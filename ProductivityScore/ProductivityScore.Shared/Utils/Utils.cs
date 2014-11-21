@@ -97,9 +97,9 @@ namespace ProductivityScore.Utils
         /// <typeparam name="T">The type of the data context</typeparam>
         /// <param name="ob">The object to start the search from</param>
         /// <returns>The DataContext value found, or null</returns>
-        public static T GetDataContext<T>(DependencyObject ob)
+        public static T GetDataContext<T>(Object ob)
         {
-            DependencyObject scan = ob;
+            DependencyObject scan = ob as DependencyObject;
             while (scan != null)
             {
                 if (scan is FrameworkElement)
