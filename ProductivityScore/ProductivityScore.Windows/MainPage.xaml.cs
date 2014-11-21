@@ -24,7 +24,7 @@ namespace ProductivityScore
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        Entries entries = Entries.Singleton; 
+        ModelList<Entry> entries = new ModelList<Entry>(); 
 
         public MainPage()
         {

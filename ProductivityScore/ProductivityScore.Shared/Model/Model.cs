@@ -21,24 +21,15 @@ namespace ProductivityScore.Model
         }
     }
 
-    class Entries
-        : ReactiveList<Entry>
-    {
-        private static Entries _singleton;
-        public static Entries Singleton
-        {
-            get
-            {
-                if (_singleton == null)
-                    _singleton = new Entries();
-                return _singleton;
-            }
-        }
 
-        private Entries()
+    class ModelList<T>
+        : ReactiveList<T>
+        where T: new()
+    {
+        public ModelList()
         {
-            DB.Default.CreateTable<Entry>();
-            AddRange(DB.Default.Table<Entry>());
+            DB.Default.CreateTable<T>();
+            AddRange(DB.Default.Table<T>());
             Debug.WriteLine("Loaded " + Count + " " + GetType().Name);
 
             this.ItemsAdded.Subscribe(x => DB.Default.Insert(x));
