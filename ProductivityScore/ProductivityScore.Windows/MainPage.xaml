@@ -12,28 +12,71 @@
             <ColumnDefinition Width="300*" MinWidth="300"/>
             <ColumnDefinition Width="200*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="1" Margin="20" Background="Black">
-            <TextBlock FontSize="36" Margin="40,20,0,0">History</TextBlock>
-            <ItemsControl x:Name="HistoryItems">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid HorizontalAlignment="Stretch" MinWidth="100" Margin="20,0,20,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100*"/>
-                                <ColumnDefinition Width="50*"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock FontSize="18" Grid.Column="0" Text="{Binding Description}">Desc</TextBlock>
-                            <TextBlock FontSize="18" Grid.Column="1" Text="{Binding Points}">Pts</TextBlock>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>
+
+        <Border Grid.Column="0" Background="Black" Margin="20" Padding="40">
+            <StackPanel Background="Black">
+                <TextBlock FontSize="36">New</TextBlock>
+                <ItemsControl x:Name="TemplateItems">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalAlignment="Stretch" MinWidth="100" Margin="20,0,20,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100*"/>
+                                    <ColumnDefinition Width="50*"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock FontSize="18" Grid.Column="0" Text="{Binding Description}" Margin="10,0,10,0">Desc</TextBlock>
+                                <TextBlock FontSize="18" Grid.Column="1" Text="{Binding Points}" Margin="10,0,10,0">Pts</TextBlock>
+                                <Button Grid.Column="2" Tapped="Button_Tapped_1" >Add</Button>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Grid HorizontalAlignment="Stretch" MinWidth="100" Margin="20,0,20,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100*"/>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="NewTemplateDescription" FontSize="18" Grid.Column="0" PlaceholderText="description" Margin="10,0,10,0"></TextBox>
+                    <TextBox x:Name="NewTemplatePoints" FontSize="18" Grid.Column="1" PlaceholderText="points" InputScope="Number" Margin="10,0,10,0"></TextBox>
+                    <Button Grid.Column="2" Tapped="Button_Tapped">Add</Button>
+                </Grid>
+            </StackPanel>
+        </Border>
+        
+        <Border Grid.Column="1" Background="Black" Margin="20" Padding="40">
+            <StackPanel >
+                <TextBlock FontSize="36">History</TextBlock>
+                <ItemsControl x:Name="HistoryItems">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalAlignment="Stretch" MinWidth="100" Margin="20,0,20,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100*"/>
+                                    <ColumnDefinition Width="50*"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding Date}"/>
+                                <TextBlock Grid.Column="1" FontSize="18" Text="{Binding Description}">Desc</TextBlock>
+                                <TextBlock Grid.Column="2" FontSize="18" Text="{Binding Points}">Pts</TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Border>
+        
     </Grid>
 </Page>

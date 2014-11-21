@@ -11,14 +11,27 @@ namespace ProductivityScore.Model
     class Entry
     {
         [AutoIncrement, PrimaryKey]
-        public int Id { get; set; }
+        protected internal int Id { get; set; }
         public string Description { get; set; }
         public int Points { get; set; }
+        public DateTime Date { get; set; }
+
+        public Entry()
+        {
+            Date = DateTime.Now;
+        }
 
         public override string ToString()
         {
             return "[" + Description + ": " + Points + "]";
         }
+    }
+
+
+    class Template
+        : Entry
+    {
+
     }
 
 
@@ -30,7 +43,8 @@ namespace ProductivityScore.Model
         {
             DB.Default.CreateTable<T>();
             AddRange(DB.Default.Table<T>());
-            Debug.WriteLine("Loaded " + Count + " " + GetType().Name);
+
+            Debug.WriteLine("Loaded " + Count + " " + GetType().Name + "(" + typeof(T).Name + ")");
 
             this.ItemsAdded.Subscribe(x => DB.Default.Insert(x));
             this.ItemsRemoved.Subscribe(x => DB.Default.Delete(x));
