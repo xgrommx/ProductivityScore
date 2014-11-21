@@ -33,6 +33,8 @@ namespace ProductivityScore
         Subject<Template> AddTemplateStream = new Subject<Template>();
         Subject<Entry> AddEntryStream = new Subject<Entry>();
 
+        Subject<Entry> DeleteEntryStream = new Subject<Entry>();
+
 
         public MainPage()
         {
@@ -43,7 +45,14 @@ namespace ProductivityScore
 
             AddTemplateStream.Subscribe(x => templates.Add(x));
             AddEntryStream.Subscribe(x => entries.Add(x));
+
+            DeleteEntryStream.Subscribe(x => entries.Remove(x));
         }
+
+
+        //
+        //  Handlers that feed to the event stream
+        //
 
 
         private void AddTemplateButton_Tapped(object sender, TappedRoutedEventArgs e)
@@ -64,6 +73,12 @@ namespace ProductivityScore
                 Description = context.Description,
                 Points = context.Points,
             });
+        }
+
+        private void DeleteEntryButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Entry context = XAMLHelper.GetDataContext<Entry>(sender as DependencyObject);
+            DeleteEntryStream.OnNext(context);
         }
     }
 }
