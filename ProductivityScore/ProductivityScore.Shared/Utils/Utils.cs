@@ -58,7 +58,7 @@ namespace ProductivityScore.Utils
         /// </summary>
         /// <param name="parent">The element whose children to get</param>
         /// <returns>A flat list of all the children</returns>
-        public static List<Control> allChildren(DependencyObject parent)
+        public static List<Control> AllChildren(DependencyObject parent)
         {
             var list = new List<Control>();
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
@@ -66,17 +66,19 @@ namespace ProductivityScore.Utils
                 var child = VisualTreeHelper.GetChild(parent, i);
                 if (child is Control)
                     list.Add(child as Control);
-                list.AddRange(allChildren(child));
+                list.AddRange(AllChildren(child));
             }
             return list;
         }
+
+
         /// <summary>
         /// Get the first parent with the given name
         /// </summary>
         /// <param name="ob">The element to start the search from</param>
         /// <param name="parentName">The target parent name</param>
         /// <returns>The parent element</returns>
-        public static FrameworkElement getParent(DependencyObject ob, String parentName)
+        public static FrameworkElement GetParent(DependencyObject ob, String parentName)
         {
             DependencyObject parent = ob;
             while (parent != null)
@@ -87,13 +89,15 @@ namespace ProductivityScore.Utils
             }
             return null;
         }
+
+
         /// <summary>
         /// Finds the first parent with a DataContext value of type T
         /// </summary>
         /// <typeparam name="T">The type of the data context</typeparam>
         /// <param name="ob">The object to start the search from</param>
         /// <returns>The DataContext value found, or null</returns>
-        public static T getDataContext<T>(DependencyObject ob)
+        public static T GetDataContext<T>(DependencyObject ob)
         {
             DependencyObject scan = ob;
             while (scan != null)
