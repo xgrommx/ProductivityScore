@@ -85,11 +85,18 @@ namespace ProductivityScore
         private void AddEntryButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             Template context = XAMLHelper.GetDataContext<Template>(sender as DependencyObject);
-            AddEntryStream.OnNext(new Entry
-            {
-                Description = context.Description,
-                Points = context.Points,
-            });
+            if (context != null)
+                AddEntryStream.OnNext(new Entry
+                {
+                    Description = context.Description,
+                    Points = context.Points,
+                });
+            else
+                AddEntryStream.OnNext(new Entry
+                {
+                    Description = NewEntryDescription.Text,
+                    Points = int.Parse(NewEntryPoints.Text),
+                });
         }
 
 
