@@ -46,9 +46,9 @@ namespace ProductivityScore
                 x => new
                 {
                     Source = x,
-                    Description = x.Description + "!!!",
-                    Points = x.Points + 1,
-                    Date = x.Date.ToString("dd MMM, yyyy"),
+                    Description = x.Description,
+                    Points = x.Points,
+                    Date = x.Date.ToString("dd MMM"),
                 },
                 x => x.Source
             );
@@ -57,6 +57,8 @@ namespace ProductivityScore
             TemplateItems.ItemsSource = templates;
 
             TotalScore.DataContext = entries.DeriveObservableProperty(es => es.Sum(e => e.Points));
+            TotalScoreToday.DataContext = entries.DeriveObservableProperty(es => es.Where(e => e.Date.Subtract(new TimeSpan(1,0,0,0)).CompareTo(DateTime.Now)>0)
+                                                                                   .Sum(e => e.Points));
 
             AddTemplateStream.Subscribe(x => templates.Add(x));
             AddEntryStream.Subscribe(x => entries.Add(x));
