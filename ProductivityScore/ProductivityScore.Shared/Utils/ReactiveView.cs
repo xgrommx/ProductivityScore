@@ -73,9 +73,7 @@ namespace ProductivityScore.Utils
             this.sourceToLocal = sourceToLocal;
             this.localToSource = localToSource;
 
-            // AddRange would call this override
-            foreach (var viewItem in source.Select(sourceToLocal))
-                base.Add(viewItem);
+            base.AddRange(source.Select(sourceToLocal));
 
             source.ItemsAdded.Subscribe(x => base.Add(sourceToLocal(x)));
             source.ItemsRemoved.Subscribe(x => base.Remove(sourceToLocal(x)));
@@ -88,7 +86,7 @@ namespace ProductivityScore.Utils
         /// Adds an item to the collection. The source of the view is updated first, then the view.
         /// </summary>
         /// <param name="item">The item to be added</param>
-        public override void Add(TSource item)
+        public new void Add(TSource item)
         {
             source.Add(localToSource(item));
         }
@@ -98,7 +96,7 @@ namespace ProductivityScore.Utils
         /// Add a range of items to the collection. The source of the view is updated first, then the view.
         /// </summary>
         /// <param name="collection">The items to be added</param>
-        public override void AddRange(IEnumerable<TSource> collection)
+        public new void AddRange(IEnumerable<TSource> collection)
         {
             source.AddRange(collection.Select(localToSource));
         }
@@ -108,7 +106,7 @@ namespace ProductivityScore.Utils
         /// Removes an item from the collection. The source of the view is updated first, then the view.
         /// </summary>
         /// <param name="item">The item to be removed</param>
-        public override bool Remove(TSource item)
+        public new bool Remove(TSource item)
         {
             return source.Remove(localToSource(item));
         }
@@ -119,7 +117,7 @@ namespace ProductivityScore.Utils
         /// </summary>
         /// <param name="oldIndex">The old position</param>
         /// <param name="newIndex">The new position</param>
-        public override void Move(int oldIndex, int newIndex)
+        public new void Move(int oldIndex, int newIndex)
         {
             source.Move(oldIndex, newIndex);
         }
