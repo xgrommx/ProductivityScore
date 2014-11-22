@@ -30,9 +30,9 @@
                                     <ColumnDefinition Width="50*"/>
                                     <ColumnDefinition Width="100"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock FontSize="18" Grid.Column="0" Text="{Binding Description}" Margin="10,0,10,0">Desc</TextBlock>
-                                <TextBlock FontSize="18" Grid.Column="1" Text="{Binding Points}" Margin="10,0,10,0">Pts</TextBlock>
-                                <Button Grid.Column="2" Tapped="AddEntryButton_Tapped" >Add</Button>
+                                <TextBlock FontSize="18" Grid.Column="0" Text="{Binding Description}" Margin="10,0,10,0" VerticalAlignment="Center">Desc</TextBlock>
+                                <TextBlock FontSize="18" Grid.Column="1" Text="{Binding Points}" Margin="10,0,10,0" VerticalAlignment="Center">Pts</TextBlock>
+                                <Button Grid.Column="2" Tapped="AddEntryButton_Tapped">Add</Button>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -43,7 +43,7 @@
                         <ColumnDefinition Width="50*"/>
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox x:Name="NewTemplateDescription" FontSize="18" Grid.Column="0" PlaceholderText="description" Margin="10,0,10,0"></TextBox>
+                    <TextBox x:Name="NewTemplateDescription" FontSize="18" Grid.Column="0" PlaceholderText="new template description" Margin="10,0,10,0" ></TextBox>
                     <TextBox x:Name="NewTemplatePoints" FontSize="18" Grid.Column="1" PlaceholderText="points" InputScope="Number" Margin="10,0,10,0"></TextBox>
                     <Button Grid.Column="2" Tapped="AddTemplateButton_Tapped">Add</Button>
                 </Grid>
@@ -51,8 +51,12 @@
         </Border>
         
         <Border Grid.Column="1" Background="Black" Margin="20" Padding="40">
-            <StackPanel >
+            <StackPanel>
                 <TextBlock FontSize="36">History</TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>Total score: </TextBlock>
+                    <TextBlock x:Name="TotalScore" Text="{Binding Value}"></TextBlock>
+                </StackPanel>
                 <ItemsControl x:Name="HistoryItems">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -68,10 +72,10 @@
                                     <ColumnDefinition Width="50*"/>
                                     <ColumnDefinition Width="50"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" FontSize="18" Text="{Binding Id}"/>
-                                <TextBlock Grid.Column="1" FontSize="18" Text="{Binding Description}">Desc</TextBlock>
-                                <TextBlock Grid.Column="2" FontSize="18" Text="{Binding Points}">Pts</TextBlock>
-                                <Button Grid.Column="3" Tapped="DeleteEntryButton_Tapped">x</Button>
+                                <TextBlock Grid.Column="0" FontSize="18" Text="{Binding Date}" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="1" FontSize="18" Text="{Binding Description}" VerticalAlignment="Center">Desc</TextBlock>
+                                <TextBlock Grid.Column="2" FontSize="18" Text="{Binding Points}" VerticalAlignment="Center">Pts</TextBlock>
+                                <Button Grid.Column="3" Tapped="DeleteEntryButton_Tapped">X</Button>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

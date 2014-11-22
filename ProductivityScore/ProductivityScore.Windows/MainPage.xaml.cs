@@ -16,6 +16,9 @@ using System.Reactive;
 using System.Reactive.Subjects;
 using ProductivityScore.Model;
 using ProductivityScore.Utils;
+using ReactiveUI;
+using System.Reflection;
+using System.Diagnostics;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -29,7 +32,6 @@ namespace ProductivityScore
         ModelList<Entry> entries = new ModelList<Entry>();
         ModelList<Template> templates = new ModelList<Template>();
 
-
         Subject<Template> AddTemplateStream = new Subject<Template>();
         Subject<Entry> AddEntryStream = new Subject<Entry>();
 
@@ -40,8 +42,21 @@ namespace ProductivityScore
         {
             this.InitializeComponent();
 
-            HistoryItems.ItemsSource = entries;
+            var entriesView = entries.CreateView(
+                x => new
+                {
+                    Source = x,
+                    Description = x.Description + "!!!",
+                    Points = x.Points + 1,
+                    Date = x.Date.ToString("dd MMM, yyyy"),
+                },
+                x => x.Source
+            );
+
+            HistoryItems.ItemsSource = entriesView;
             TemplateItems.ItemsSource = templates;
+
+            TotalScore.DataContext = entries.DeriveObservableProperty(es => es.Sum(e => e.Points));
 
             AddTemplateStream.Subscribe(x => templates.Add(x));
             AddEntryStream.Subscribe(x => entries.Add(x));
@@ -75,10 +90,23 @@ namespace ProductivityScore
             });
         }
 
+
         private void DeleteEntryButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            Entry context = XAMLHelper.GetDataContext<Entry>(sender as DependencyObject);
-            DeleteEntryStream.OnNext(context);
+            Object context = XAMLHelper.GetDataContext<Object>(sender as DependencyObject);
+            Entry entry = context.GetField<Entry>("Source");
+            DeleteEntryStream.OnNext(entry);
+        }
+    }
+
+
+    static class ReflectiveExtension
+    {
+        public static T GetField<T>(this Object o, string field)
+        {
+            var v = o.GetType().GetRuntimeProperty(field).GetValue(o);
+            if (v is T) return (T)v;
+            throw new KeyNotFoundException(field);
         }
     }
 }
