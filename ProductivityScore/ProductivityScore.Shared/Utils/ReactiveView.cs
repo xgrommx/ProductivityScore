@@ -56,6 +56,15 @@ namespace ProductivityScore.Utils
         private Func<TView, TSource> sourceToLocal;
         private Func<TSource, TView> localToSource;
 
+
+        /// <summary>
+        /// Represents a view of a ReactiveCollection.
+        /// The items in the view are mapped one for one on the source collection.
+        /// Changes in either collection are reflected in the other.
+        /// </summary>
+        /// <param name="source">The source collection</param>
+        /// <param name="sourceToLocal">The way to produce a view object from the source</param>
+        /// <param name="localToSource">The way to produce a source object from the view</param>
         public ReactiveView(ReactiveList<TView> source,
                             Func<TView,TSource> sourceToLocal,
                             Func<TSource,TView> localToSource = null)
@@ -64,7 +73,9 @@ namespace ProductivityScore.Utils
             this.sourceToLocal = sourceToLocal;
             this.localToSource = localToSource;
 
-            AddRange(source.Select(sourceToLocal));
+            // AddRange would call this override
+            foreach (var viewItem in source.Select(sourceToLocal))
+                base.Add(viewItem);
 
             source.ItemsAdded.Subscribe(x => base.Add(sourceToLocal(x)));
             source.ItemsRemoved.Subscribe(x => base.Remove(sourceToLocal(x)));
@@ -72,16 +83,42 @@ namespace ProductivityScore.Utils
             //TODO on item changed
         }
 
+
+        /// <summary>
+        /// Adds an item to the collection. The source of the view is updated first, then the view.
+        /// </summary>
+        /// <param name="item">The item to be added</param>
         public override void Add(TSource item)
         {
             source.Add(localToSource(item));
         }
 
+
+        /// <summary>
+        /// Add a range of items to the collection. The source of the view is updated first, then the view.
+        /// </summary>
+        /// <param name="collection">The items to be added</param>
+        public override void AddRange(IEnumerable<TSource> collection)
+        {
+            source.AddRange(collection.Select(localToSource));
+        }
+
+
+        /// <summary>
+        /// Removes an item from the collection. The source of the view is updated first, then the view.
+        /// </summary>
+        /// <param name="item">The item to be removed</param>
         public override bool Remove(TSource item)
         {
             return source.Remove(localToSource(item));
         }
 
+
+        /// <summary>
+        /// Moves an item inside this list. The source of the view is updated first, then the view.
+        /// </summary>
+        /// <param name="oldIndex">The old position</param>
+        /// <param name="newIndex">The new position</param>
         public override void Move(int oldIndex, int newIndex)
         {
             source.Move(oldIndex, newIndex);
