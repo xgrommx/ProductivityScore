@@ -31,7 +31,12 @@ namespace ProductivityScore.Model
     class Template
         : Entry
     {
+    }
 
+
+    class Bounty
+        : Entry
+    {
     }
 
 
