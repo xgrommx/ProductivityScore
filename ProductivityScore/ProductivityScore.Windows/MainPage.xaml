@@ -14,8 +14,16 @@
         </Grid.ColumnDefinitions>
 
         <Border Grid.Column="0" Background="Black" Margin="20" Padding="40">
-            <StackPanel Background="Black">
-                <TextBlock FontSize="36">New</TextBlock>
+            <StackPanel>
+                <StackPanel.Background>
+                    <SolidColorBrush Color="{StaticResource BaseDark}"/>
+                </StackPanel.Background>
+                <Border Margin="0,4" Padding="4">
+                    <Border.Background>
+                        <SolidColorBrush Color="{StaticResource Base}"/>
+                    </Border.Background>
+                    <TextBlock FontSize="36">New</TextBlock>
+                </Border>
                 <ItemsControl x:Name="TemplateItems">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -54,8 +62,13 @@
                     <TextBox Grid.Column="1" Grid.Row="1" x:Name="NewEntryPoints" FontSize="18" PlaceholderText="points" InputScope="Number" Margin="10,2,10,2" Text="0"></TextBox>
                     <Button Grid.Column="2" Grid.Row="1" Tapped="AddEntryButton_Tapped">Add</Button>
                 </Grid>
-                
-                <TextBlock FontSize="36">Bounties</TextBlock>
+
+                <Border Margin="0,4" Padding="4">
+                    <Border.Background>
+                        <SolidColorBrush Color="{StaticResource Base}"/>
+                    </Border.Background>
+                    <TextBlock FontSize="36">Bounties</TextBlock>
+                </Border>
                 <ItemsControl x:Name="BountyItems">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -93,18 +106,34 @@
                 </Grid>
             </StackPanel>
         </Border>
-        
+
         <Border Grid.Column="1" Background="Black" Margin="20" Padding="40">
             <StackPanel>
-                <TextBlock FontSize="36">History</TextBlock>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Total score: "></TextBlock>
-                    <TextBlock x:Name="TotalScore" Text="{Binding Value}"></TextBlock>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Total score today: "></TextBlock>
-                    <TextBlock x:Name="TotalScoreToday" Text="{Binding Value}"></TextBlock>
-                </StackPanel>
+                <StackPanel.Background>
+                    <SolidColorBrush Color="{StaticResource BaseDark}"/>
+                </StackPanel.Background>
+                <Border Margin="0,4" Padding="4">
+                    <Border.Background>
+                        <SolidColorBrush Color="{StaticResource Base}"/>
+                    </Border.Background>
+                    <TextBlock FontSize="36">History</TextBlock>
+                </Border>
+                <Border Background="Black" Padding="20, 4, 20, 4">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Total score: "></TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TotalScore" Text="{Binding Value}"></TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Total score today: "></TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="1" x:Name="TotalScoreToday" Text="{Binding Value}"></TextBlock>
+                    </Grid>
+                </Border>
                 <ItemsControl x:Name="HistoryItems">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -130,6 +159,6 @@
                 </ItemsControl>
             </StackPanel>
         </Border>
-        
+
     </Grid>
 </Page>
