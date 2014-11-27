@@ -64,12 +64,27 @@ namespace ProductivityScore
                 es.Where(e => e.Date.Date.Equals(DateTime.Now.Date))
                   .Sum(e => e.Points));
 
-            AddTemplateStream.Subscribe(x => templates.Add(x));
-            AddEntryStream.Subscribe(x => entries.Add(x));
+            AddTemplateStream.Subscribe(x =>
+            {
+                templates.Add(x);
+                NewTemplateDescription.Text = String.Empty;
+                NewTemplatePoints.Text = "0";
+            });
+            AddEntryStream.Subscribe(x => 
+            {
+                entries.Add(x);
+                NewEntryDescription.Text = String.Empty;
+                NewEntryPoints.Text = "0";
+            });
 
             DeleteEntryStream.Subscribe(x => entries.Remove(x));
 
-            AddBountyStream.Subscribe(bounty => bounties.Add(bounty));
+            AddBountyStream.Subscribe(bounty =>
+            {
+                bounties.Add(bounty);
+                NewBountyDescription.Text = String.Empty;
+                NewBountyPoints.Text = "0";
+            });
             CompleteBountyStream.Subscribe(bounty =>
             {
                 entries.Add(new Entry
