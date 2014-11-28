@@ -34,10 +34,14 @@ namespace ProductivityScore
         ModelList<Bounty> bounties = new ModelList<Bounty>();
 
         Subject<Template> AddTemplateStream = new Subject<Template>();
+        Subject<Template> DeleteTemplateStream = new Subject<Template>();
+
         Subject<Entry> AddEntryStream = new Subject<Entry>();
         Subject<Entry> DeleteEntryStream = new Subject<Entry>();
+
         Subject<Bounty> CompleteBountyStream = new Subject<Bounty>();
         Subject<Bounty> AddBountyStream = new Subject<Bounty>();
+        Subject<Bounty> DeleteBountyStream = new Subject<Bounty>();
 
 
         public MainPage()
@@ -70,6 +74,7 @@ namespace ProductivityScore
                 NewTemplateDescription.Text = String.Empty;
                 NewTemplatePoints.Text = "0";
             });
+            DeleteTemplateStream.Subscribe(template => templates.Remove(template));
             AddEntryStream.Subscribe(x => 
             {
                 entries.Add(x);
@@ -94,6 +99,7 @@ namespace ProductivityScore
                 });
                 bounties.Remove(bounty);
             });
+            DeleteBountyStream.Subscribe(bounty => bounties.Remove(bounty));
         }
 
 
@@ -150,6 +156,20 @@ namespace ProductivityScore
             Bounty context = XAMLHelper.GetDataContext<Bounty>(sender);
             CompleteBountyStream.OnNext(context);
         }
+
+        private void DeleteTemplateButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Template context = XAMLHelper.GetDataContext<Template>(sender);
+            DeleteTemplateStream.OnNext(context);
+        }
+
+        private void DeleteBountyButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Bounty context = XAMLHelper.GetDataContext<Bounty>(sender);
+            DeleteBountyStream.OnNext(context);
+        }
+
+
     }
 
 

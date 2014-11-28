@@ -37,10 +37,12 @@
                                     <ColumnDefinition Width="100*"/>
                                     <ColumnDefinition Width="50*"/>
                                     <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="50"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock FontSize="18" Grid.Column="0" Text="{Binding Description}" Margin="10,0,10,0" VerticalAlignment="Center">Desc</TextBlock>
                                 <TextBlock FontSize="18" Grid.Column="1" Text="{Binding Points}" Margin="10,0,10,0" VerticalAlignment="Center">Pts</TextBlock>
                                 <Button Grid.Column="2" Tapped="AddEntryButton_Tapped">Add</Button>
+                                <Button Grid.Column="3" Tapped="DeleteTemplateButton_Tapped">X</Button>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -54,6 +56,7 @@
                         <ColumnDefinition Width="100*"/>
                         <ColumnDefinition Width="50*"/>
                         <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="50"/>
                     </Grid.ColumnDefinitions>
                     <TextBox Grid.Column="0" Grid.Row="0" x:Name="NewTemplateDescription" FontSize="18"  PlaceholderText="new template description" Margin="10,2,10,2" ></TextBox>
                     <TextBox Grid.Column="1" Grid.Row="0" x:Name="NewTemplatePoints" FontSize="18" PlaceholderText="points" InputScope="Number" Margin="10,2,10,2" Text="0"></TextBox>
@@ -82,10 +85,12 @@
                                     <ColumnDefinition Width="100*"/>
                                     <ColumnDefinition Width="50*"/>
                                     <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="50"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock FontSize="18" Grid.Column="0" Text="{Binding Description}" Margin="10,0,10,0" VerticalAlignment="Center">Desc</TextBlock>
                                 <TextBlock FontSize="18" Grid.Column="1" Text="{Binding Points}" Margin="10,0,10,0" VerticalAlignment="Center">Pts</TextBlock>
                                 <Button Grid.Column="2" Tapped="BountyCompletedButton_Tapped">Add</Button>
+                                <Button Grid.Column="3" Tapped="DeleteBountyButton_Tapped">X</Button>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -99,6 +104,7 @@
                         <ColumnDefinition Width="100*"/>
                         <ColumnDefinition Width="50*"/>
                         <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="50"/>
                     </Grid.ColumnDefinitions>
                     <TextBox Grid.Column="0" Grid.Row="0" x:Name="NewBountyDescription" FontSize="18"  PlaceholderText="new bounty description" Margin="10,2,10,2" ></TextBox>
                     <TextBox Grid.Column="1" Grid.Row="0" x:Name="NewBountyPoints" FontSize="18" PlaceholderText="points" InputScope="Number" Margin="10,2,10,2" Text="0"></TextBox>
